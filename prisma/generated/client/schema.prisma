@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+  // binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Users {
+  id              String            @id
+  role            Roles             @relation(fields: [role_id], references: [id])
+  role_id         Int               @default(1)
+  username        String            @unique
+  password        String
+  created_date    DateTime          @default(now())
+  Fishes          Fishes[]
+  Schedule_ships  Schedule_ships[]
+  Coupon_discount Coupon_discount[]
+}
+
+model Fishes {
+  id              String            @id
+  user            Users             @relation(fields: [user_id], references: [id])
+  user_id         String
+  type            Types             @relation(fields: [type_id], references: [id])
+  type_id         String
+  events          Events            @relation(fields: [event_id], references: [id])
+  event_id        String
+  name            String
+  price           Int
+  price_usd       Int
+  gender          String
+  size            String
+  images1         String
+  images2         String?
+  images3         String?
+  videoURL        String?
+  isAvailable     Boolean
+  isEvent         Boolean
+  isNewArrival    Boolean
+  created_date    DateTime          @default(now())
+  discounted_fish Discounted_fish[]
+}
+
+model Schedule_ships {
+  id                  String   @id
+  user                Users    @relation(fields: [user_id], references: [id])
+  user_id             String
+  scheduleName        String
+  scheduleImage       String
+  scheduleDescription String?
+  created_date        DateTime @default(now())
+}
+
+model Types {
+  id           String   @id
+  name         String
+  created_date DateTime @default(now())
+  Fishes       Fishes[]
+}
+
+model Coupon_discount {
+  id                          String   @id
+  user                        Users    @relation(fields: [user_id], references: [id])
+  user_id                     String
+  discountCode                String
+  discountMinTransaction_idr  Int
+  discountMinTransaction_usd  Int
+  discountMinTransaction_fish Int
+  discountPercentage          Int
+  discountMaxPrice_idr        Int
+  discountMaxPrice_usd        Int
+  expirationDate              DateTime
+  created_date                DateTime @default(now())
+}
+
+model Events {
+  id           String   @id
+  name         String
+  created_date DateTime @default(now())
+  Fishes       Fishes[]
+}
+
+model Discounted_fish {
+  id                 String   @id
+  fish               Fishes   @relation(fields: [fish_id], references: [id])
+  fish_id            String
+  isDiscount         Boolean
+  discountPercentage Int
+  discountPriceIdr   Int
+  discountPriceUsd   Int
+  created_date       DateTime @default(now())
+}
+
+model Roles {
+  id           Int      @id
+  name         String
+  created_date DateTime @default(now())
+  Users        Users[]
+}
