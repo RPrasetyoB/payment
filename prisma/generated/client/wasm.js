@@ -107,83 +107,30 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UsersScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  role_id: 'role_id',
-  username: 'username',
-  password: 'password',
-  created_date: 'created_date'
+  name: 'name',
+  password: 'password'
 };
 
-exports.Prisma.FishesScalarFieldEnum = {
+exports.Prisma.PaymentHistoryScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  type_id: 'type_id',
-  event_id: 'event_id',
-  name: 'name',
-  price: 'price',
-  price_usd: 'price_usd',
-  gender: 'gender',
-  size: 'size',
-  images1: 'images1',
-  images2: 'images2',
-  images3: 'images3',
-  videoURL: 'videoURL',
-  isAvailable: 'isAvailable',
-  isEvent: 'isEvent',
-  isNewArrival: 'isNewArrival',
-  created_date: 'created_date'
+  payment_account_id: 'payment_account_id',
+  transaction_type: 'transaction_type',
+  amount: 'amount',
+  currency: 'currency',
+  date: 'date',
+  to_address: 'to_address',
+  status: 'status'
 };
 
-exports.Prisma.Schedule_shipsScalarFieldEnum = {
+exports.Prisma.PaymentAccountScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  scheduleName: 'scheduleName',
-  scheduleImage: 'scheduleImage',
-  scheduleDescription: 'scheduleDescription',
-  created_date: 'created_date'
-};
-
-exports.Prisma.TypesScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_date: 'created_date'
-};
-
-exports.Prisma.Coupon_discountScalarFieldEnum = {
-  id: 'id',
-  user_id: 'user_id',
-  discountCode: 'discountCode',
-  discountMinTransaction_idr: 'discountMinTransaction_idr',
-  discountMinTransaction_usd: 'discountMinTransaction_usd',
-  discountMinTransaction_fish: 'discountMinTransaction_fish',
-  discountPercentage: 'discountPercentage',
-  discountMaxPrice_idr: 'discountMaxPrice_idr',
-  discountMaxPrice_usd: 'discountMaxPrice_usd',
-  expirationDate: 'expirationDate',
-  created_date: 'created_date'
-};
-
-exports.Prisma.EventsScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_date: 'created_date'
-};
-
-exports.Prisma.Discounted_fishScalarFieldEnum = {
-  id: 'id',
-  fish_id: 'fish_id',
-  isDiscount: 'isDiscount',
-  discountPercentage: 'discountPercentage',
-  discountPriceIdr: 'discountPriceIdr',
-  discountPriceUsd: 'discountPriceUsd',
-  created_date: 'created_date'
-};
-
-exports.Prisma.RolesScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_date: 'created_date'
+  account_name: 'account_name',
+  type: 'type',
+  account_number: 'account_number'
 };
 
 exports.Prisma.SortOrder = {
@@ -196,21 +143,11 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  Users: 'Users',
-  Fishes: 'Fishes',
-  Schedule_ships: 'Schedule_ships',
-  Types: 'Types',
-  Coupon_discount: 'Coupon_discount',
-  Events: 'Events',
-  Discounted_fish: 'Discounted_fish',
-  Roles: 'Roles'
+  User: 'User',
+  PaymentHistory: 'PaymentHistory',
+  PaymentAccount: 'PaymentAccount'
 };
 
 /**
