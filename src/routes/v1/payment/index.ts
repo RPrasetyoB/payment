@@ -1,9 +1,11 @@
-// import express from "express";
-// import { createPaymentTransfer, createWithdrawal } from "../../../controllers/payment";
+import { createPaymentTransfer, createWithdrawal, getAllPaymentHistory } from "../../../controllers/payment";
+import { FastifyInstance } from "fastify";
+import authentication from "../../../middlewares/authentication";
 
-// const payment = express.Router();
+const paymentRouter = async (fastify: FastifyInstance) => {
+  fastify.get("/history", { preHandler: authentication }, getAllPaymentHistory);
+  fastify.post("/send", { preHandler: authentication }, createPaymentTransfer);
+  fastify.post("/withdraw", { preHandler: authentication }, createWithdrawal);
+};
 
-// payment.post("/send", createPaymentTransfer);
-// payment.post("/withdraw", createWithdrawal);
-
-// export default payment;
+export default paymentRouter;

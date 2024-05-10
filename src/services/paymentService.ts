@@ -2,6 +2,7 @@ import { JwtPayload } from "jsonwebtoken";
 import ErrorHandler from "../utils/standardError";
 import { loggedUser } from "../utils/decodedToken";
 import {
+  getPaymentHistoryList,
   postCreateTransfer,
   postCreateWithdraw,
   putTransactionCompleted,
@@ -11,16 +12,16 @@ import {
 // ------ create payment transfer ------
 const createPaymentTransferService = async (
   token: JwtPayload | null,
-  paymentAccountId: number,
-  ammount: number,
+  payment_account_id: number,
+  amount: number,
   currency: string,
-  to: string
+  to_address: string
 ) => {
   const { userId } = loggedUser(token);
   try {
-    const createTransfer = await postCreateTransfer(userId, paymentAccountId, ammount, currency, to);
+    const createTransfer = await postCreateTransfer(userId, payment_account_id, amount, currency, to_address);
+    console.log("Transaction in progress, status:", createTransfer.status);
     if (createTransfer) {
-      console.log("Transaction in progress, status:", createTransfer.status);
       return {
         success: true,
         message: "Payment / transaction added successfully",
@@ -41,9 +42,9 @@ const createPaymentTransferService = async (
 const processingPaymentTransferService = async (id: number) => {
   try {
     const updateTransfer = await putTransactionProcessing(id);
+    console.log("Transaction in progress, status:", updateTransfer.status);
+    console.log("Please wait, this process may take up to 30 seconds to complete.");
     if (updateTransfer) {
-      console.log("Transaction in progress, status:", updateTransfer.status);
-      console.log("Please wait, this process may take up to 30 seconds to complete.");
       return {
         success: true,
         message: "Payment / transaction updated successfully",
@@ -85,13 +86,13 @@ const completedPaymentTransferService = async (id: number) => {
 // ------ create withdraw ------
 const createWithdrawService = async (
   token: JwtPayload | null,
-  paymentAccountId: number,
-  ammount: number,
+  payment_account_id: number,
+  amount: number,
   currency: string
 ) => {
   const { userId } = loggedUser(token);
   try {
-    const createWithdraw = await postCreateWithdraw(userId, paymentAccountId, ammount, currency);
+    const createWithdraw = await postCreateWithdraw(userId, payment_account_id, amount, currency);
     if (createWithdraw) {
       console.log("Withdrawal in progress, status:", createWithdraw.status);
       return {
@@ -155,6 +156,26 @@ const completedWithdrawService = async (id: number) => {
   }
 };
 
+// ------ get all payment history ------
+const getPaymentHistoryService = async (token: JwtPayload | null) => {
+  const { userId } = loggedUser(token);
+  try {
+    const paymentList = await getPaymentHistoryList(userId);
+    return {
+      success: true,
+      message: "Payment history list retrieved successfully",
+      data: paymentList,
+    };
+  } catch (error: any) {
+    console.error("transaction processing failed:", error);
+    throw new ErrorHandler({
+      success: false,
+      status: error.status,
+      message: error.message,
+    });
+  }
+};
+
 export {
   createPaymentTransferService,
   processingPaymentTransferService,
@@ -162,4 +183,5 @@ export {
   createWithdrawService,
   processingWithdrawService,
   completedWithdrawService,
+  getPaymentHistoryService,
 };

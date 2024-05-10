@@ -120,9 +120,9 @@ const postCreateWithdraw = async (userId: string, paymentAccountId: number, amou
   }
 };
 
-const getAccountList = async (userId: string) => {
+const getPaymentHistoryList = async (userId: string) => {
   try {
-    const accountList = await prisma.paymentAccount.findMany({
+    const accountList = await prisma.paymentHistory.findMany({
       where: {
         user_id: userId,
       },
@@ -136,20 +136,10 @@ const getAccountList = async (userId: string) => {
   }
 };
 
-const deleteAccount = async (id: number) => {
-  try {
-    const account = await prisma.paymentAccount.delete({
-      where: {
-        id: id,
-      },
-    });
-    return account;
-  } catch (error: any) {
-    console.error(error);
-    return null;
-  } finally {
-    await disconnectDB();
-  }
+export {
+  postCreateTransfer,
+  putTransactionProcessing,
+  putTransactionCompleted,
+  postCreateWithdraw,
+  getPaymentHistoryList,
 };
-
-export { postCreateTransfer, putTransactionProcessing, putTransactionCompleted, postCreateWithdraw };

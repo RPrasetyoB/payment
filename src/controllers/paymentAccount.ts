@@ -1,61 +1,78 @@
-// import { Request, Response, NextFunction } from "express";
-// import { getToken, loggedUser } from "../utils/decodedToken";
-// import {
-//   createPaymentAccountService,
-//   deletePaymentAccountService,
-//   getPaymentAccountListService,
-// } from "../services/paymentAccountService";
+import { FastifyRequest, FastifyReply } from "fastify";
+import errorCatchPlugin from "../middlewares/errorHandler";
+import Joi from "joi";
+import { getToken } from "../utils/decodedToken";
+import {
+  createPaymentAccountService,
+  deletePaymentAccountService,
+  getPaymentAccountListService,
+} from "../services/paymentAccountService";
 
-// // ------ create payment account ------
-// const createPaymentAccount = async (req: Request, res: Response, next: NextFunction) => {
-//   const { account_name, account_number, type } = req.body;
-//   const token = getToken(req);
-//   try {
-//     const result = await createPaymentAccountService(token, account_name, account_number, type);
-//     if (result.success) {
-//       res.status(200).json({
-//         success: true,
-//         message: result.message,
-//         data: result.data,
-//       });
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+const createPaymentAccountSchema = Joi.object({
+  account_name: Joi.string().required(),
+  account_number: Joi.string().required(),
+  type: Joi.string().required(),
+});
 
-// // ------ get user's payment account list ------
-// const getAllAccount = async (req: Request, res: Response, next: NextFunction) => {
-//   const token = getToken(req);
-//   try {
-//     const result = await getPaymentAccountListService(token);
-//     if (result.success) {
-//       res.status(200).json({
-//         success: true,
-//         message: result.message,
-//         data: result.data,
-//       });
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+// ------ create payment account ------
+const createPaymentAccount = async (req: FastifyRequest, res: FastifyReply) => {
+  const { account_name, account_number, type } = req.body as {
+    account_name: string;
+    account_number: string;
+    type: string;
+  };
+  const token = getToken(req);
+  try {
+    const { error } = createPaymentAccountSchema.validate(req.body);
+    if (error) {
+      throw new Error(error.details[0].message);
+    }
 
-// // ------ delete user's payment account ------
-// const deletePaymentAccount = async (req: Request, res: Response, next: NextFunction) => {
-//   const { id } = req.params;
-//   try {
-//     const result = await deletePaymentAccountService(parseInt(id));
-//     if (result.success) {
-//       res.status(200).json({
-//         success: true,
-//         message: result.message,
-//         data: result.data,
-//       });
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    const result = await createPaymentAccountService(token, account_name, account_number, type);
+    if (result.success) {
+      res.status(200).send({
+        success: true,
+        message: result.message,
+        data: result.data,
+      });
+    }
+  } catch (error: any) {
+    errorCatchPlugin(error, req, res);
+  }
+};
 
-// export { createPaymentAccount, getAllAccount, deletePaymentAccount };
+// ------ get user's payment account list ------
+const getAllAccount = async (req: FastifyRequest, res: FastifyReply) => {
+  const token = getToken(req);
+  try {
+    const result = await getPaymentAccountListService(token);
+    if (result.success) {
+      res.status(200).send({
+        success: true,
+        message: result.message,
+        data: result.data,
+      });
+    }
+  } catch (error: any) {
+    errorCatchPlugin(error, req, res);
+  }
+};
+
+// ------ delete user's payment account ------
+const deletePaymentAccount = async (req: FastifyRequest, res: FastifyReply) => {
+  const { id } = req.params as { id: string };
+  try {
+    const result = await deletePaymentAccountService(parseInt(id));
+    if (result.success) {
+      res.status(200).send({
+        success: true,
+        message: result.message,
+        data: result.data,
+      });
+    }
+  } catch (error: any) {
+    errorCatchPlugin(error, req, res);
+  }
+};
+
+export { createPaymentAccount, getAllAccount, deletePaymentAccount };

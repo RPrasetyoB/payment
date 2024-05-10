@@ -1,14 +1,9 @@
 import { userLogin, userRegister } from "../../../controllers/auth";
-import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from "fastify";
+import { FastifyInstance } from "fastify";
 
 const authRouter = async (fastify: FastifyInstance) => {
-  fastify.post("/login", async (req: FastifyRequest, res: FastifyReply) => {
-    await userLogin(req, res);
-  });
-
-  fastify.post("/register", async (req: FastifyRequest, res: FastifyReply) => {
-    await userRegister(req, res);
-  });
+  fastify.post("/login", userLogin);
+  fastify.post("/register", userRegister);
 };
 
 export default authRouter;

@@ -1,10 +1,11 @@
-// import express from "express";
-// import { createPaymentAccount, deletePaymentAccount, getAllAccount } from "../../../controllers/paymentAccount";
+import { createPaymentAccount, deletePaymentAccount, getAllAccount } from "../../../controllers/paymentAccount";
+import { FastifyInstance } from "fastify";
+import authentication from "../../../middlewares/authentication";
 
-// const paymentAccount = express.Router();
+const paymentAccountRouter = async (fastify: FastifyInstance) => {
+  fastify.post("/", { preHandler: authentication }, createPaymentAccount);
+  fastify.get("/", { preHandler: authentication }, getAllAccount);
+  fastify.delete("/:id", { preHandler: authentication }, deletePaymentAccount);
+};
 
-// paymentAccount.post("/", createPaymentAccount);
-// paymentAccount.get("/", getAllAccount);
-// paymentAccount.delete("/:id", deletePaymentAccount);
-
-// export default paymentAccount;
+export default paymentAccountRouter;

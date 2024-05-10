@@ -6,13 +6,13 @@ import { loggedUser } from "../utils/decodedToken";
 // ------ create payment account ------
 const createPaymentAccountService = async (
   token: JwtPayload | null,
-  accountName: string,
-  accountNumber: string,
+  account_name: string,
+  account_number: string,
   type: string
 ) => {
   const { userId } = loggedUser(token);
   try {
-    const createAccount = await postCreateAccount(userId, accountName, accountNumber, type);
+    const createAccount = await postCreateAccount(userId, account_name, account_number, type);
     return {
       success: true,
       message: "Payment account added successfully",

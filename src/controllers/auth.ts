@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { userLoginService, userRegistrationService } from "../services/authService";
 import errorCatchPlugin from "../middlewares/errorHandler";
 import Joi from "joi";
+import { userLoginService, userRegistrationService } from "../services/authService";
 
 const userRegisterSchema = Joi.object({
   name: Joi.string().min(3).required(),
@@ -15,13 +15,13 @@ const userLoginSchema = Joi.object({
 
 // ------ Create user ------
 const userRegister = async (req: FastifyRequest, res: FastifyReply) => {
+  const { name, password } = req.body as { name: string; password: string };
   try {
     const { error } = userRegisterSchema.validate(req.body);
     if (error) {
       throw new Error(error.details[0].message);
     }
 
-    const { name, password } = req.body as { name: string; password: string };
     const result = await userRegistrationService(name, password);
     if (result.success) {
       res.status(200).send({
@@ -37,13 +37,13 @@ const userRegister = async (req: FastifyRequest, res: FastifyReply) => {
 
 // ------ Login user ------
 const userLogin = async (req: FastifyRequest, res: FastifyReply) => {
+  const { id, password } = req.body as { id: string; password: string };
   try {
     const { error } = userLoginSchema.validate(req.body);
     if (error) {
       throw new Error(error.details[0].message);
     }
 
-    const { id, password } = req.body as { id: string; password: string };
     const result = await userLoginService(id, password);
     if (result?.success) {
       res.status(200).send({
