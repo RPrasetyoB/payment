@@ -1,5 +1,5 @@
 import { JwtPayload } from "jsonwebtoken";
-import { getAccountList, postCreateAccount } from "../dao/paymentAccountDao";
+import { deleteAccount, getAccountList, postCreateAccount } from "../dao/paymentAccountDao";
 import ErrorHandler from "../utils/standardError";
 import { loggedUser } from "../utils/decodedToken";
 
@@ -55,4 +55,30 @@ const getPaymentAccountListService = async (token: JwtPayload | null) => {
   }
 };
 
-export { createPaymentAccountService, getPaymentAccountListService };
+// ------ delete payment account ------
+const deletePaymentAccountService = async (id: number) => {
+  try {
+    const delAccount = await deleteAccount(id);
+    if (!delAccount) {
+      throw new ErrorHandler({
+        success: false,
+        status: 404,
+        message: "payment account not found.",
+      });
+    }
+    return {
+      success: true,
+      message: "Payment account deleted successfully",
+      data: delAccount,
+    };
+  } catch (error: any) {
+    console.error(error);
+    throw new ErrorHandler({
+      success: false,
+      status: error.status,
+      message: error.message,
+    });
+  }
+};
+
+export { createPaymentAccountService, getPaymentAccountListService, deletePaymentAccountService };

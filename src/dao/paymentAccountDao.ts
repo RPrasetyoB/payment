@@ -1,3 +1,4 @@
+import { access } from "fs";
 import { disconnectDB, prisma } from "../config/db/dbConnection";
 import ErrorHandler from "../utils/standardError";
 
@@ -41,4 +42,20 @@ const getAccountList = async (userId: string) => {
   }
 };
 
-export { postCreateAccount, getAccountList };
+const deleteAccount = async (id: number) => {
+  try {
+    const account = await prisma.paymentAccount.delete({
+      where: {
+        id: id,
+      },
+    });
+    return account;
+  } catch (error: any) {
+    console.error(error);
+    return null;
+  } finally {
+    await disconnectDB();
+  }
+};
+
+export { postCreateAccount, getAccountList, deleteAccount };
