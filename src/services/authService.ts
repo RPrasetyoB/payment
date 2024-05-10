@@ -63,10 +63,7 @@ const userLoginnService = async (id: string, password: string) => {
         status: 401,
       });
     }
-    const isPasswordValid = await bcryptjs.compare(
-      password,
-      user.password || ""
-    );
+    const isPasswordValid = await bcryptjs.compare(password, user.password || "");
     if (!isPasswordValid) {
       throw new ErrorHandler({
         success: false,
@@ -74,14 +71,12 @@ const userLoginnService = async (id: string, password: string) => {
         status: 401,
       });
     }
-    const expirationTime = 60 * 60 * 24;
     const token = jwt.sign(
       {
         id: user.id,
         name: user.name,
       },
-      JWT_SIGN!,
-      { expiresIn: expirationTime }
+      JWT_SIGN!
     );
     return {
       success: true,

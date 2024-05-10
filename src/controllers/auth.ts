@@ -1,15 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  userLoginnService,
-  userRegistrationService,
-} from "../services/authService";
+import { userLoginnService, userRegistrationService } from "../services/authService";
 
 // ------ Create user ------
-const userRegister = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const userRegister = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, password } = req.body;
     const result = await userRegistrationService(name, password);
