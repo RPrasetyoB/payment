@@ -1,10 +1,12 @@
-import cors from "cors";
-import { Application } from "express";
+import cors from "@fastify/cors";
+import { FastifyInstance } from "fastify";
 
-
-const corsMiddleware = (app: Application) => {
-    app.use(cors());
-    app.options('*', cors());
+const corsMiddleware = async (app: FastifyInstance) => {
+  await app.register(cors, {
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  });
 };
 
 export default corsMiddleware;

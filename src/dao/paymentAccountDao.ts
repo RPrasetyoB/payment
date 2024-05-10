@@ -1,4 +1,3 @@
-import { access } from "fs";
 import { disconnectDB, prisma } from "../config/db/dbConnection";
 import ErrorHandler from "../utils/standardError";
 

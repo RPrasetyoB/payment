@@ -1,12 +1,9 @@
-import { Application } from "express";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
-const cspPolicyMiddleware = (app: Application) => {
-  app.use((req, res, next) => {
-    res.setHeader(
-      "Content-Security-Policy",
-      "script-src 'self' http://localhost:3000"
-    );
-    next();
+const cspPolicyMiddleware = (app: FastifyInstance) => {
+  app.addHook("onRequest", (req: FastifyRequest, res: FastifyReply, done) => {
+    res.header("Content-Security-Policy", "script-src 'self' http://localhost:3000");
+    done();
   });
 };
 

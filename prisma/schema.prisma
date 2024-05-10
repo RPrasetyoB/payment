@@ -28,8 +28,8 @@ model PaymentHistory {
   transaction_type   String
   amount             Int
   currency           String
-  date               DateTime
-  to_address         Int
+  date               DateTime @default(now())
+  to_address         String?
   status             String
 
   @@map("Payment_histories")

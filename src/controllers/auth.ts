@@ -1,37 +1,59 @@
-import { Request, Response, NextFunction } from "express";
-import { userLoginnService, userRegistrationService } from "../services/authService";
+import { FastifyRequest, FastifyReply } from "fastify";
+import { userLoginService, userRegistrationService } from "../services/authService";
+import errorCatchPlugin from "../middlewares/errorHandler";
+import Joi from "joi";
+
+const userRegisterSchema = Joi.object({
+  name: Joi.string().min(3).required(),
+  password: Joi.string().min(6).required(),
+});
+
+const userLoginSchema = Joi.object({
+  id: Joi.string().required(),
+  password: Joi.string().required(),
+});
 
 // ------ Create user ------
-const userRegister = async (req: Request, res: Response, next: NextFunction) => {
+const userRegister = async (req: FastifyRequest, res: FastifyReply) => {
   try {
-    const { name, password } = req.body;
+    const { error } = userRegisterSchema.validate(req.body);
+    if (error) {
+      throw new Error(error.details[0].message);
+    }
+
+    const { name, password } = req.body as { name: string; password: string };
     const result = await userRegistrationService(name, password);
     if (result.success) {
-      res.status(200).json({
+      res.status(200).send({
         success: true,
         message: result.message,
         data: result.data,
       });
     }
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    errorCatchPlugin(error, req, res);
   }
 };
 
-// ------ login user ------
-const userLogin = async (req: Request, res: Response, next: NextFunction) => {
+// ------ Login user ------
+const userLogin = async (req: FastifyRequest, res: FastifyReply) => {
   try {
-    const { id, password } = req.body;
-    const result = await userLoginnService(id, password);
-    if (result.success) {
-      res.status(200).json({
+    const { error } = userLoginSchema.validate(req.body);
+    if (error) {
+      throw new Error(error.details[0].message);
+    }
+
+    const { id, password } = req.body as { id: string; password: string };
+    const result = await userLoginService(id, password);
+    if (result?.success) {
+      res.status(200).send({
         success: true,
         message: result.message,
         token: result.data,
       });
     }
-  } catch (error) {
-    next(error);
+  } catch (error: any) {
+    errorCatchPlugin(error, req, res);
   }
 };
 

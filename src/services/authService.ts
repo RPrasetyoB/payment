@@ -6,27 +6,6 @@ import JWT_SIGN from "../config/jwt/jwt";
 
 // ------ Register ------
 const userRegistrationService = async (name: string, password: string) => {
-  if (!name) {
-    throw new ErrorHandler({
-      success: false,
-      message: "Name cannot be empty",
-      status: 400,
-    });
-  }
-  if (name.length < 3) {
-    throw new ErrorHandler({
-      success: false,
-      message: "Name must be at least 3 characters long",
-      status: 400,
-    });
-  }
-  if (password.length < 6) {
-    throw new ErrorHandler({
-      success: false,
-      message: "Password must be at least 6 characters long",
-      status: 400,
-    });
-  }
   try {
     const hashedPassword = await bcryptjs.hash(password, 10);
     const createUser = await postCreateUser(name, hashedPassword);
@@ -46,14 +25,7 @@ const userRegistrationService = async (name: string, password: string) => {
 };
 
 // ------ Login ------
-const userLoginnService = async (id: string, password: string) => {
-  if (!id) {
-    throw new ErrorHandler({
-      success: false,
-      message: "id cannot be empty",
-      status: 400,
-    });
-  }
+const userLoginService = async (id: string, password: string) => {
   try {
     const user = await getUser(id);
     if (!user) {
@@ -84,7 +56,6 @@ const userLoginnService = async (id: string, password: string) => {
       data: token,
     };
   } catch (error: any) {
-    console.error(error);
     throw new ErrorHandler({
       success: false,
       status: error.status,
@@ -93,4 +64,4 @@ const userLoginnService = async (id: string, password: string) => {
   }
 };
 
-export { userRegistrationService, userLoginnService };
+export { userRegistrationService, userLoginService };

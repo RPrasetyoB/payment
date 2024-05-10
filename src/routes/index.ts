@@ -1,22 +1,20 @@
-import express, { Request, Response, NextFunction } from "express";
+import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import v1Router from "./v1";
 
-const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Welcome to Renaldi Payment API",
-    version: "1.0.0",
+const router = async (fastify: FastifyInstance) => {
+  fastify.get("/", async (req: FastifyRequest, res: FastifyReply) => {
+    return {
+      success: true,
+      message: "Welcome to Renaldi Payment API",
+      version: "1.0.0",
+    };
   });
-});
 
-router.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  res.locals.message = err.message;
-  res.status(err.status || 500);
-  res.json({ success: false, message: err.message });
-});
+  fastify.setErrorHandler((error: Error, req: FastifyRequest, res: FastifyReply) => {
+    res.status(500).send({ success: false, message: error.message });
+  });
 
-router.use("/api/v1", v1Router);
+  fastify.register(v1Router, { prefix: "/api/v1" });
+};
 
 export default router;

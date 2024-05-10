@@ -1,27 +1,27 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
-import { db } from './config/db/dbConnection';
-import errorCatch from './middlewares/errorHandler';
-import middleWares from './middlewares';
-import router from './routes';
+import fastify from "fastify";
+import * as dotenv from "dotenv";
+import { db } from "./config/db/dbConnection";
+import errorCatchPlugin from "./middlewares/errorHandler";
+import middleWares from "./middlewares";
+import router from "./routes";
 
-// integration with .env
+// Integration with .env
 dotenv.config();
-const app = express()
+
+// Create a Fastify instance
+const app = fastify();
+
 // DB connection
 db();
-// body parser
-app.use(express.json());
-// server port
-const server_port = process.env.SERVER_PORT || 3000;
-// security middleware
-middleWares(app)
-// endpoint routes
-app.use(router)
-// middleware for catch error
-app.use(errorCatch)
-// server port listening
-app.listen(server_port, ()=> {
-  console.log(`server listening at http://localhost:${server_port}`)
-});
 
+// Middleware registration
+middleWares(app);
+
+// Endpoint routes
+app.register(router);
+
+// Server port listening
+const server_port: number = Number(process.env.SERVER_PORT) || 3001;
+app.listen({ port: server_port }, () => {
+  console.log(`listening at port: http://localhost:${server_port}`);
+});

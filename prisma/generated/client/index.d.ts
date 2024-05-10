@@ -2034,14 +2034,12 @@ export namespace Prisma {
     id: number | null
     payment_account_id: number | null
     amount: number | null
-    to_address: number | null
   }
 
   export type PaymentHistorySumAggregateOutputType = {
     id: number | null
     payment_account_id: number | null
     amount: number | null
-    to_address: number | null
   }
 
   export type PaymentHistoryMinAggregateOutputType = {
@@ -2052,7 +2050,7 @@ export namespace Prisma {
     amount: number | null
     currency: string | null
     date: Date | null
-    to_address: number | null
+    to_address: string | null
     status: string | null
   }
 
@@ -2064,7 +2062,7 @@ export namespace Prisma {
     amount: number | null
     currency: string | null
     date: Date | null
-    to_address: number | null
+    to_address: string | null
     status: string | null
   }
 
@@ -2086,14 +2084,12 @@ export namespace Prisma {
     id?: true
     payment_account_id?: true
     amount?: true
-    to_address?: true
   }
 
   export type PaymentHistorySumAggregateInputType = {
     id?: true
     payment_account_id?: true
     amount?: true
-    to_address?: true
   }
 
   export type PaymentHistoryMinAggregateInputType = {
@@ -2227,7 +2223,7 @@ export namespace Prisma {
     amount: number
     currency: string
     date: Date
-    to_address: number
+    to_address: string | null
     status: string
     _count: PaymentHistoryCountAggregateOutputType | null
     _avg: PaymentHistoryAvgAggregateOutputType | null
@@ -2293,7 +2289,7 @@ export namespace Prisma {
       amount: number
       currency: string
       date: Date
-      to_address: number
+      to_address: string | null
       status: string
     }, ExtArgs["result"]["paymentHistory"]>
     composites: {}
@@ -2697,7 +2693,7 @@ export namespace Prisma {
     readonly amount: FieldRef<"PaymentHistory", 'Int'>
     readonly currency: FieldRef<"PaymentHistory", 'String'>
     readonly date: FieldRef<"PaymentHistory", 'DateTime'>
-    readonly to_address: FieldRef<"PaymentHistory", 'Int'>
+    readonly to_address: FieldRef<"PaymentHistory", 'String'>
     readonly status: FieldRef<"PaymentHistory", 'String'>
   }
     
@@ -4043,6 +4039,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references 
    */
@@ -4166,7 +4170,7 @@ export namespace Prisma {
     amount?: IntFilter<"PaymentHistory"> | number
     currency?: StringFilter<"PaymentHistory"> | string
     date?: DateTimeFilter<"PaymentHistory"> | Date | string
-    to_address?: IntFilter<"PaymentHistory"> | number
+    to_address?: StringNullableFilter<"PaymentHistory"> | string | null
     status?: StringFilter<"PaymentHistory"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -4179,7 +4183,7 @@ export namespace Prisma {
     amount?: SortOrder
     currency?: SortOrder
     date?: SortOrder
-    to_address?: SortOrder
+    to_address?: SortOrderInput | SortOrder
     status?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -4195,7 +4199,7 @@ export namespace Prisma {
     amount?: IntFilter<"PaymentHistory"> | number
     currency?: StringFilter<"PaymentHistory"> | string
     date?: DateTimeFilter<"PaymentHistory"> | Date | string
-    to_address?: IntFilter<"PaymentHistory"> | number
+    to_address?: StringNullableFilter<"PaymentHistory"> | string | null
     status?: StringFilter<"PaymentHistory"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
@@ -4208,7 +4212,7 @@ export namespace Prisma {
     amount?: SortOrder
     currency?: SortOrder
     date?: SortOrder
-    to_address?: SortOrder
+    to_address?: SortOrderInput | SortOrder
     status?: SortOrder
     _count?: PaymentHistoryCountOrderByAggregateInput
     _avg?: PaymentHistoryAvgOrderByAggregateInput
@@ -4228,7 +4232,7 @@ export namespace Prisma {
     amount?: IntWithAggregatesFilter<"PaymentHistory"> | number
     currency?: StringWithAggregatesFilter<"PaymentHistory"> | string
     date?: DateTimeWithAggregatesFilter<"PaymentHistory"> | Date | string
-    to_address?: IntWithAggregatesFilter<"PaymentHistory"> | number
+    to_address?: StringNullableWithAggregatesFilter<"PaymentHistory"> | string | null
     status?: StringWithAggregatesFilter<"PaymentHistory"> | string
   }
 
@@ -4344,8 +4348,8 @@ export namespace Prisma {
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
     user: UserCreateNestedOneWithoutPaymentHistoriesInput
   }
@@ -4357,8 +4361,8 @@ export namespace Prisma {
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
   }
 
@@ -4368,7 +4372,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentHistoriesNestedInput
   }
@@ -4381,7 +4385,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4392,8 +4396,8 @@ export namespace Prisma {
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
   }
 
@@ -4403,7 +4407,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4415,7 +4419,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4564,9 +4568,29 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type PaymentHistoryCountOrderByAggregateInput = {
@@ -4585,7 +4609,6 @@ export namespace Prisma {
     id?: SortOrder
     payment_account_id?: SortOrder
     amount?: SortOrder
-    to_address?: SortOrder
   }
 
   export type PaymentHistoryMaxOrderByAggregateInput = {
@@ -4616,7 +4639,6 @@ export namespace Prisma {
     id?: SortOrder
     payment_account_id?: SortOrder
     amount?: SortOrder
-    to_address?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -4647,6 +4669,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type PaymentAccountCountOrderByAggregateInput = {
@@ -4787,6 +4827,10 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type UserUpdateOneRequiredWithoutPaymentHistoriesNestedInput = {
     create?: XOR<UserCreateWithoutPaymentHistoriesInput, UserUncheckedCreateWithoutPaymentHistoriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentHistoriesInput
@@ -4862,6 +4906,20 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4903,13 +4961,41 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type PaymentHistoryCreateWithoutUserInput = {
     payment_account_id: number
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
   }
 
@@ -4919,8 +5005,8 @@ export namespace Prisma {
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
   }
 
@@ -4984,7 +5070,7 @@ export namespace Prisma {
     amount?: IntFilter<"PaymentHistory"> | number
     currency?: StringFilter<"PaymentHistory"> | string
     date?: DateTimeFilter<"PaymentHistory"> | Date | string
-    to_address?: IntFilter<"PaymentHistory"> | number
+    to_address?: StringNullableFilter<"PaymentHistory"> | string | null
     status?: StringFilter<"PaymentHistory"> | string
   }
 
@@ -5109,8 +5195,8 @@ export namespace Prisma {
     transaction_type: string
     amount: number
     currency: string
-    date: Date | string
-    to_address: number
+    date?: Date | string
+    to_address?: string | null
     status: string
   }
 
@@ -5127,7 +5213,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5138,7 +5224,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5149,7 +5235,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    to_address?: IntFieldUpdateOperationsInput | number
+    to_address?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
   }
 

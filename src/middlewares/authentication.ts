@@ -1,29 +1,32 @@
-import { Request, Response, NextFunction } from 'express';
-import { getToken } from '../utils/decodedToken';
+import { FastifyRequest, FastifyReply, FastifyInstance } from "fastify";
+import { getToken } from "../utils/decodedToken";
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: User;
-        }
-    }
+declare module "fastify" {
+  interface FastifyRequest {
+    user?: User;
+  }
 }
 
 const auth = () => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-        const decodedToken = getToken(req) as ExtendedJwtPayload;
-        if (!decodedToken) {
-            return res.status(401).send({ message: "Unauthorized, please login" });
-        }
-        try {
-            req.user = decodedToken;
-            next();
-        } catch (error) {
-            res.status(401).send({ message: "Invalid Access" });
-        }
-    };
+  return async (req: FastifyRequest, res: FastifyReply, next: () => void) => {
+    const decodedToken = getToken(req) as User;
+    if (!decodedToken) {
+      res.code(401).send({ message: "Unauthorized, please login" });
+      return;
+    }
+    try {
+      req.user = decodedToken;
+      next();
+    } catch (error) {
+      res.code(401).send({ message: "Invalid Access" });
+    }
+  };
 };
 
-const authentication = auth();
+const authentication = (app: FastifyInstance) => {
+  app.addHook("onRequest", async (request: FastifyRequest, reply: FastifyReply) => {
+    auth()(request, reply, () => {});
+  });
+};
 
 export default authentication;

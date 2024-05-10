@@ -1,18 +1,8 @@
-import { Express, Request, Response, NextFunction } from "express";
-import helmet from "helmet";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import helmet from "@fastify/helmet";
 
-const setPermissionsPolicy = (req: Request, res: Response, next: NextFunction) => {
-  res.setHeader("Permissions-Policy", "your-permissions-policy");
-  next();
-};
-
-const helmetApp = (app: Express) => {
-  app.use(helmet({
-    xFrameOptions: {action: "deny"},
-    crossOriginEmbedderPolicy: true
-  }));
-  app.use(helmet.frameguard({ action: 'deny' }));
-  app.use(setPermissionsPolicy);
+const helmetApp = async (fastify: FastifyInstance) => {
+  await fastify.register(helmet, { contentSecurityPolicy: false });
 };
 
 export default helmetApp;

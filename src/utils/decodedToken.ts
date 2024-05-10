@@ -1,8 +1,9 @@
 import { Request } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import JWT_SIGN from "../config/jwt/jwt";
+import { FastifyRequest } from "fastify";
 
-export const getToken = (req: Request): JwtPayload | null => {
+export const getToken = (req: FastifyRequest): JwtPayload | null => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
