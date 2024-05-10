@@ -1,9 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  getUserByTokenService,
-  getUserListService,
-  updateUserService,
-} from "../services/userService";
+import { getUserByTokenService, getUserListService, updateUserService } from "../services/userService";
 import { getToken, loggedUser } from "../utils/decodedToken";
 
 // ------ get user list ------
@@ -42,11 +38,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // ------ get user ------
-const getUserProfileByToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getUserProfileByToken = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = loggedUser(req.user!);
   try {
     const result = await getUserByTokenService(userId);
