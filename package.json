@@ -11,11 +11,10 @@
     "build": "tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
     "start": "tsc && node dist/app.js",
-    "docker": "docker build -t payment .",
-    "docker-start": "docker run -d -p 3000:3000 payment"
+    "docker-start": "docker-compose up"
   },
   "keywords": [],
-  "author": "revou next team 1",
+  "author": "renaldi",
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
@@ -23,8 +22,6 @@
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.10.2",
-    "@types/js-yaml": "^4.0.9",
-    "@types/swagger-ui-express": "^4.1.6",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "fastify": "^4.27.0",
@@ -34,8 +31,7 @@
     "jsonwebtoken": "^9.0.2",
     "nanoid": "^3.0.0",
     "node": "^21.6.2",
-    "prisma": "^5.10.2",
-    "swagger-ui-express": "^5.0.0"
+    "prisma": "^5.10.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
