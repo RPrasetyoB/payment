@@ -5,6 +5,7 @@
 This API provides endpoints for simulating payment operations. It allows users to register, log in, manage their payment accounts, perform transactions such as transfers and withdrawals, and view payment history.
 
 ### Postman Documentation
+https://documenter.getpostman.com/view/30790473/2sA3JM8h89
 
 ## Prerequisites
 
