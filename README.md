@@ -5,6 +5,7 @@
 This API provides endpoints for simulating payment operations. It allows users to register, log in, manage their payment accounts, perform transactions such as transfers and withdrawals, and view payment history.
 
 ### Postman Documentation
+
 https://documenter.getpostman.com/view/30790473/2sA3JM8h89
 
 ## Prerequisites
@@ -64,6 +65,15 @@ export const loggedUser = (decodedToken: JwtPayload | null) => {
 | Create payment transaction transfer | POST   | *baseUrl*/api/payment/send         | yes                 | payment_account_id: number, amount: number, currency: string, to_address: string |
 | Create withdrawal                   | POST   | baseUrl*/api/payment/withdraw      | yes                 | payment_account_id:  number, amount: number, currency: string                    |
 | Get paymeny history                 | GET    | baseUrl*/api/payment/history       | yes                 | -                                                                                |
+
+#### Account for testing :
+
+```json
+{
+    "id": "2304972621",
+    "password": "abc123"
+}
+```
 
 ## Tutorial: Using the API locally
 
