@@ -96,12 +96,6 @@ Follow these steps to use the API server:
 
 - **Open Docker Desktop**
 
-- **Build Docker Image**: Build docker image using the following command:
-  
-  ```bash
-  npm run docker
-  ```
-
 - **Run the Server**: Start the API server in Container locally using the following command:
   
   ```bash
