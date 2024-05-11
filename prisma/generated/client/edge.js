@@ -21,7 +21,7 @@ const {
   warnOnce,
   defineDmmfProperty,
   Public,
-  detectRuntime,
+  getRuntime
 } = require('./runtime/edge.js')
 
 
@@ -31,12 +31,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.10.2
- * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+ * Prisma Client JS version: 5.13.0
+ * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
  */
 Prisma.prismaVersion = {
-  client: "5.10.2",
-  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
+  client: "5.13.0",
+  engine: "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -156,6 +156,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -166,8 +170,8 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.10.2",
-  "engineVersion": "5a9203d0590c951969e85a7d07215503f4672eb9",
+  "clientVersion": "5.13.0",
+  "engineVersion": "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b",
   "datasourceNames": [
     "db"
   ],
@@ -181,8 +185,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\r\n  provider = \"prisma-client-js\"\r\n  output   = \"./generated/client\"\r\n  // binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\r\n}\r\n\r\ndatasource db {\r\n  provider  = \"postgresql\"\r\n  url       = env(\"DATABASE_URL\")\r\n  directUrl = env(\"DIRECT_URL\")\r\n}\r\n\r\nmodel User {\r\n  id               String           @id\r\n  name             String\r\n  password         String\r\n  PaymentHistories PaymentHistory[]\r\n  PaymentAccounts  PaymentAccount[]\r\n\r\n  @@map(\"Users\")\r\n}\r\n\r\nmodel PaymentHistory {\r\n  id                 Int      @id @default(autoincrement())\r\n  user               User     @relation(fields: [user_id], references: [id])\r\n  user_id            String\r\n  payment_account_id Int\r\n  transaction_type   String\r\n  amount             Int\r\n  currency           String\r\n  date               DateTime @default(now())\r\n  to_address         String?\r\n  status             String\r\n\r\n  @@map(\"Payment_histories\")\r\n}\r\n\r\nmodel PaymentAccount {\r\n  id             Int    @id @default(autoincrement())\r\n  user           User   @relation(fields: [user_id], references: [id])\r\n  user_id        String\r\n  account_name   String\r\n  type           String\r\n  account_number String\r\n\r\n  @@map(\"Payment_accounts\")\r\n}\r\n",
-  "inlineSchemaHash": "f03e6f1c81587161ee44c5274659333d6332c333947897714f577ef11ebb42a8",
+  "inlineSchema": "generator client {\r\n  provider      = \"prisma-client-js\"\r\n  output        = \"./generated/client\"\r\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\r\n}\r\n\r\ndatasource db {\r\n  provider  = \"postgresql\"\r\n  url       = env(\"DATABASE_URL\")\r\n  directUrl = env(\"DIRECT_URL\")\r\n}\r\n\r\nmodel User {\r\n  id               String           @id\r\n  name             String\r\n  password         String\r\n  PaymentHistories PaymentHistory[]\r\n  PaymentAccounts  PaymentAccount[]\r\n\r\n  @@map(\"Users\")\r\n}\r\n\r\nmodel PaymentHistory {\r\n  id                 Int      @id @default(autoincrement())\r\n  user               User     @relation(fields: [user_id], references: [id])\r\n  user_id            String\r\n  payment_account_id Int\r\n  transaction_type   String\r\n  amount             Int\r\n  currency           String\r\n  date               DateTime @default(now())\r\n  to_address         String?\r\n  status             String\r\n\r\n  @@map(\"Payment_histories\")\r\n}\r\n\r\nmodel PaymentAccount {\r\n  id             Int    @id @default(autoincrement())\r\n  user           User   @relation(fields: [user_id], references: [id])\r\n  user_id        String\r\n  account_name   String\r\n  type           String\r\n  account_number String\r\n\r\n  @@map(\"Payment_accounts\")\r\n}\r\n",
+  "inlineSchemaHash": "55eefe3b135d28a6f06377ea8fd77b7e489003088421170a351d44db54da0de6",
   "copyEngine": true
 }
 config.dirname = '/'

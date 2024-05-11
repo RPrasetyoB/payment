@@ -1,0 +1,426 @@
+openapi: 3.0.0
+info:
+  title: Payment-API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT      
+tags:
+  - name: auth
+  - name: user
+  - name: payment history
+  - name: payment account
+paths:
+  /api/v1/auth/register:
+    post:
+      tags:
+        - auth
+      summary: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: rpb2
+                password: abc123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: User registered successfully
+                data:
+                  id: '2304972621'
+                  name: rpb
+                  password: $2a$10$AfxKGyPs8Z4/24/ZDxbBn.78DNsdGKW1SO0gALfbEjVvTQJojVpXC
+  /api/v1/auth/login:
+    post:
+      tags:
+        - auth
+      summary: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '2304972621'
+                password:
+                  type: string
+                  example: abc123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Successfully logged in
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzMDQ5NzI2MjEiLCJuYW1lIjoicnBiIiwiaWF0IjoxNzE1MjU0MjU4LCJleHAiOjE3MTUzNDA2NTh9.GM7LQadVtp99Uk7BRAE-LgwcQFVKXzVtZHWnX2ki7pI
+  /api/v1/user:
+    get:
+      tags:
+        - user
+      summary: all users(for testing reason)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/user/profile:
+    get:
+      tags:
+        - user
+      summary: user detail
+      security:
+        - bearer: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: User retrieved successfully
+                data:
+                  id: '2304972621'
+                  name: rpb
+                  PaymentAccounts:
+                    - id: 1
+                      user_id: '2304972621'
+                      account_name: BCA
+                      type: debit
+                      account_number: '123456789'
+                    - id: 3
+                      user_id: '2304972621'
+                      account_name: Mandiri
+                      type: credit
+                      account_number: '987654321'
+                    - id: 5
+                      user_id: '2304972621'
+                      account_name: BRI
+                      type: debit
+                      account_number: '1029384756'
+                  PaymentHistories:
+                    - id: 24
+                      user_id: '2304972621'
+                      payment_account_id: 5
+                      transaction_type: withdraw
+                      amount: 40000
+                      currency: MYR
+                      date: '2024-05-10T12:56:48.000Z'
+                      to_address: null
+                      status: completed
+                    - id: 9
+                      user_id: '2304972621'
+                      payment_account_id: 3
+                      transaction_type: withdraw
+                      amount: 200
+                      currency: USD
+                      date: '2024-05-10T07:20:12.000Z'
+                      to_address: null
+                      status: completed
+                    - id: 28
+                      user_id: '2304972621'
+                      payment_account_id: 3
+                      transaction_type: transfer
+                      amount: 200
+                      currency: USD
+                      date: '2024-05-10T13:00:16.000Z'
+                      to_address: '123456789'
+                      status: completed
+                    - id: 11
+                      user_id: '2304972621'
+                      payment_account_id: 5
+                      transaction_type: withdraw
+                      amount: 2000000
+                      currency: IDR
+                      date: '2024-05-10T12:35:21.000Z'
+                      to_address: null
+                      status: completed
+                    - id: 17
+                      user_id: '2304972621'
+                      payment_account_id: 3
+                      transaction_type: transfer
+                      amount: 200
+                      currency: USD
+                      date: '2024-05-10T12:39:58.000Z'
+                      to_address: '123456789'
+                      status: completed
+                    - id: 32
+                      user_id: '2304972621'
+                      payment_account_id: 3
+                      transaction_type: transfer
+                      amount: 200
+                      currency: USD
+                      date: '2024-05-10T13:12:57.000Z'
+                      to_address: '123456789'
+                      status: completed
+                    - id: 22
+                      user_id: '2304972621'
+                      payment_account_id: 5
+                      transaction_type: withdraw
+                      amount: 40000
+                      currency: MYR
+                      date: '2024-05-10T12:54:29.000Z'
+                      to_address: null
+                      status: completed
+                    - id: 34
+                      user_id: '2304972621'
+                      payment_account_id: 3
+                      transaction_type: transfer
+                      amount: 200
+                      currency: USD
+                      date: '2024-05-10T13:18:15.000Z'
+                      to_address: '123456789'
+                      status: completed
+  /api/v1/payment/history:
+    get:
+      tags:
+        - payment history
+      summary: history
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Payment history list retrieved successfully
+                data:
+                  - id: 24
+                    user_id: '2304972621'
+                    payment_account_id: 5
+                    transaction_type: withdraw
+                    amount: 40000
+                    currency: MYR
+                    date: '2024-05-10T12:56:48.000Z'
+                    to_address: null
+                    status: completed
+                  - id: 9
+                    user_id: '2304972621'
+                    payment_account_id: 3
+                    transaction_type: withdraw
+                    amount: 200
+                    currency: USD
+                    date: '2024-05-10T07:20:12.000Z'
+                    to_address: null
+                    status: completed
+                  - id: 28
+                    user_id: '2304972621'
+                    payment_account_id: 3
+                    transaction_type: transfer
+                    amount: 200
+                    currency: USD
+                    date: '2024-05-10T13:00:16.000Z'
+                    to_address: '123456789'
+                    status: completed
+                  - id: 11
+                    user_id: '2304972621'
+                    payment_account_id: 5
+                    transaction_type: withdraw
+                    amount: 2000000
+                    currency: IDR
+                    date: '2024-05-10T12:35:21.000Z'
+                    to_address: null
+                    status: completed
+                  - id: 17
+                    user_id: '2304972621'
+                    payment_account_id: 3
+                    transaction_type: transfer
+                    amount: 200
+                    currency: USD
+                    date: '2024-05-10T12:39:58.000Z'
+                    to_address: '123456789'
+                    status: completed
+                  - id: 32
+                    user_id: '2304972621'
+                    payment_account_id: 3
+                    transaction_type: transfer
+                    amount: 200
+                    currency: USD
+                    date: '2024-05-10T13:12:57.000Z'
+                    to_address: '123456789'
+                    status: completed
+                  - id: 22
+                    user_id: '2304972621'
+                    payment_account_id: 5
+                    transaction_type: withdraw
+                    amount: 40000
+                    currency: MYR
+                    date: '2024-05-10T12:54:29.000Z'
+                    to_address: null
+                    status: completed
+                  - id: 34
+                    user_id: '2304972621'
+                    payment_account_id: 3
+                    transaction_type: transfer
+                    amount: 200
+                    currency: USD
+                    date: '2024-05-10T13:18:15.000Z'
+                    to_address: '123456789'
+                    status: completed
+  /api/v1/payment/send:
+    post:
+      tags:
+        - payment history
+      summary: send
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Payment / transaction added successfully
+                data:
+                  id: 35
+                  user_id: '2304972621'
+                  payment_account_id: 5
+                  transaction_type: transfer
+                  amount: 500
+                  currency: USD
+                  date: '2024-05-10T13:33:22.000Z'
+                  to_address: '123456789'
+                  status: started
+  /api/v1/payment/withdraw:
+    post:
+      tags:
+        - payment history
+      summary: withdraw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                payment_account_id: 3
+                amount: 200
+                currency: USD
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Withdrawal added successfully
+                data:
+                  id: 24
+                  user_id: '2304972621'
+                  payment_account_id: 5
+                  transaction_type: withdraw
+                  amount: 40000
+                  currency: MYR
+                  date: '2024-05-10T12:56:48.000Z'
+                  to_address: null
+                  status: started
+  /api/v1/payment-account:
+    get:
+      tags:
+        - payment account
+      summary: get payment account
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Payment account list retrieved successfully
+                data:
+                  - id: 1
+                    user_id: '2304972621'
+                    account_name: BCA
+                    type: debit
+                    account_number: '123456789'
+                  - id: 3
+                    user_id: '2304972621'
+                    account_name: Mandiri
+                    type: credit
+                    account_number: '987654321'
+    post:
+      tags:
+        - payment account
+      summary: add payment account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                account_name: Mandiri
+                account_number: '987654321'
+                type: credit
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Payment account added successfully
+                data:
+                  id: 3
+                  user_id: '2304972621'
+                  account_name: Mandiri
+                  type: credit
+                  account_number: '987654321'
+  /api/v1/payment-account/2:
+    delete:
+      tags:
+        - payment account
+      summary: delete payment account
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Payment account deleted successfully
+                data:
+                  id: 2
+                  user_id: '2304972621'
+                  account_name: Mandiri
+                  type: credit
+                  account_number: '987654321'

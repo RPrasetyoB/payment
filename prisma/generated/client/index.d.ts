@@ -237,8 +237,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.10.2
-   * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+   * Prisma Client JS version: 5.13.0
+   * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
    */
   export type PrismaVersion = {
     client: string
@@ -365,6 +365,11 @@ export namespace Prisma {
     include: any
   }
 
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
   /**
    * Get the type of the value, that the Promise holds.
    */
@@ -413,7 +418,9 @@ export namespace Prisma {
   } &
     (T extends SelectAndInclude
       ? 'Please either choose `select` or `include`.'
-      : {})
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
 
   /**
    * Subset + Intersection
@@ -1040,7 +1047,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * UserCountOutputType without action
    */
@@ -1051,7 +1057,6 @@ export namespace Prisma {
     select?: UserCountOutputTypeSelect<ExtArgs> | null
   }
 
-
   /**
    * UserCountOutputType without action
    */
@@ -1059,14 +1064,12 @@ export namespace Prisma {
     where?: PaymentHistoryWhereInput
   }
 
-
   /**
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountPaymentAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentAccountWhereInput
   }
-
 
 
   /**
@@ -1231,6 +1234,7 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
   }
+
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     PaymentHistories?: boolean | User$PaymentHistoriesArgs<ExtArgs>
@@ -1653,7 +1657,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * User findUnique
    */
@@ -1663,7 +1666,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1671,7 +1674,6 @@ export namespace Prisma {
      */
     where: UserWhereUniqueInput
   }
-
 
   /**
    * User findUniqueOrThrow
@@ -1682,7 +1684,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1690,7 +1692,6 @@ export namespace Prisma {
      */
     where: UserWhereUniqueInput
   }
-
 
   /**
    * User findFirst
@@ -1701,7 +1702,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1739,7 +1740,6 @@ export namespace Prisma {
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
-
 
   /**
    * User findFirstOrThrow
@@ -1750,7 +1750,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1789,7 +1789,6 @@ export namespace Prisma {
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
-
   /**
    * User findMany
    */
@@ -1799,7 +1798,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1833,7 +1832,6 @@ export namespace Prisma {
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
-
   /**
    * User create
    */
@@ -1843,7 +1841,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1851,7 +1849,6 @@ export namespace Prisma {
      */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
-
 
   /**
    * User createMany
@@ -1864,7 +1861,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-
   /**
    * User update
    */
@@ -1874,7 +1870,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1886,7 +1882,6 @@ export namespace Prisma {
      */
     where: UserWhereUniqueInput
   }
-
 
   /**
    * User updateMany
@@ -1902,7 +1897,6 @@ export namespace Prisma {
     where?: UserWhereInput
   }
 
-
   /**
    * User upsert
    */
@@ -1912,7 +1906,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1929,7 +1923,6 @@ export namespace Prisma {
     update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
   }
 
-
   /**
    * User delete
    */
@@ -1939,7 +1932,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
     /**
@@ -1947,7 +1940,6 @@ export namespace Prisma {
      */
     where: UserWhereUniqueInput
   }
-
 
   /**
    * User deleteMany
@@ -1959,7 +1951,6 @@ export namespace Prisma {
     where?: UserWhereInput
   }
 
-
   /**
    * User.PaymentHistories
    */
@@ -1969,7 +1960,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     where?: PaymentHistoryWhereInput
@@ -1980,7 +1971,6 @@ export namespace Prisma {
     distinct?: PaymentHistoryScalarFieldEnum | PaymentHistoryScalarFieldEnum[]
   }
 
-
   /**
    * User.PaymentAccounts
    */
@@ -1990,7 +1980,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     where?: PaymentAccountWhereInput
@@ -2001,7 +1991,6 @@ export namespace Prisma {
     distinct?: PaymentAccountScalarFieldEnum | PaymentAccountScalarFieldEnum[]
   }
 
-
   /**
    * User without action
    */
@@ -2011,11 +2000,10 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -2270,6 +2258,7 @@ export namespace Prisma {
     to_address?: boolean
     status?: boolean
   }
+
 
   export type PaymentHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2699,7 +2688,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * PaymentHistory findUnique
    */
@@ -2709,7 +2697,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2717,7 +2705,6 @@ export namespace Prisma {
      */
     where: PaymentHistoryWhereUniqueInput
   }
-
 
   /**
    * PaymentHistory findUniqueOrThrow
@@ -2728,7 +2715,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2736,7 +2723,6 @@ export namespace Prisma {
      */
     where: PaymentHistoryWhereUniqueInput
   }
-
 
   /**
    * PaymentHistory findFirst
@@ -2747,7 +2733,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2785,7 +2771,6 @@ export namespace Prisma {
      */
     distinct?: PaymentHistoryScalarFieldEnum | PaymentHistoryScalarFieldEnum[]
   }
-
 
   /**
    * PaymentHistory findFirstOrThrow
@@ -2796,7 +2781,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2835,7 +2820,6 @@ export namespace Prisma {
     distinct?: PaymentHistoryScalarFieldEnum | PaymentHistoryScalarFieldEnum[]
   }
 
-
   /**
    * PaymentHistory findMany
    */
@@ -2845,7 +2829,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2879,7 +2863,6 @@ export namespace Prisma {
     distinct?: PaymentHistoryScalarFieldEnum | PaymentHistoryScalarFieldEnum[]
   }
 
-
   /**
    * PaymentHistory create
    */
@@ -2889,7 +2872,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2897,7 +2880,6 @@ export namespace Prisma {
      */
     data: XOR<PaymentHistoryCreateInput, PaymentHistoryUncheckedCreateInput>
   }
-
 
   /**
    * PaymentHistory createMany
@@ -2910,7 +2892,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-
   /**
    * PaymentHistory update
    */
@@ -2920,7 +2901,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2932,7 +2913,6 @@ export namespace Prisma {
      */
     where: PaymentHistoryWhereUniqueInput
   }
-
 
   /**
    * PaymentHistory updateMany
@@ -2948,7 +2928,6 @@ export namespace Prisma {
     where?: PaymentHistoryWhereInput
   }
 
-
   /**
    * PaymentHistory upsert
    */
@@ -2958,7 +2937,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2975,7 +2954,6 @@ export namespace Prisma {
     update: XOR<PaymentHistoryUpdateInput, PaymentHistoryUncheckedUpdateInput>
   }
 
-
   /**
    * PaymentHistory delete
    */
@@ -2985,7 +2963,7 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
     /**
@@ -2993,7 +2971,6 @@ export namespace Prisma {
      */
     where: PaymentHistoryWhereUniqueInput
   }
-
 
   /**
    * PaymentHistory deleteMany
@@ -3005,7 +2982,6 @@ export namespace Prisma {
     where?: PaymentHistoryWhereInput
   }
 
-
   /**
    * PaymentHistory without action
    */
@@ -3015,11 +2991,10 @@ export namespace Prisma {
      */
     select?: PaymentHistorySelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentHistoryInclude<ExtArgs> | null
   }
-
 
 
   /**
@@ -3230,6 +3205,7 @@ export namespace Prisma {
     type?: boolean
     account_number?: boolean
   }
+
 
   export type PaymentAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3651,7 +3627,6 @@ export namespace Prisma {
     
 
   // Custom InputTypes
-
   /**
    * PaymentAccount findUnique
    */
@@ -3661,7 +3636,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3669,7 +3644,6 @@ export namespace Prisma {
      */
     where: PaymentAccountWhereUniqueInput
   }
-
 
   /**
    * PaymentAccount findUniqueOrThrow
@@ -3680,7 +3654,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3688,7 +3662,6 @@ export namespace Prisma {
      */
     where: PaymentAccountWhereUniqueInput
   }
-
 
   /**
    * PaymentAccount findFirst
@@ -3699,7 +3672,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3737,7 +3710,6 @@ export namespace Prisma {
      */
     distinct?: PaymentAccountScalarFieldEnum | PaymentAccountScalarFieldEnum[]
   }
-
 
   /**
    * PaymentAccount findFirstOrThrow
@@ -3748,7 +3720,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3787,7 +3759,6 @@ export namespace Prisma {
     distinct?: PaymentAccountScalarFieldEnum | PaymentAccountScalarFieldEnum[]
   }
 
-
   /**
    * PaymentAccount findMany
    */
@@ -3797,7 +3768,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3831,7 +3802,6 @@ export namespace Prisma {
     distinct?: PaymentAccountScalarFieldEnum | PaymentAccountScalarFieldEnum[]
   }
 
-
   /**
    * PaymentAccount create
    */
@@ -3841,7 +3811,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3849,7 +3819,6 @@ export namespace Prisma {
      */
     data: XOR<PaymentAccountCreateInput, PaymentAccountUncheckedCreateInput>
   }
-
 
   /**
    * PaymentAccount createMany
@@ -3862,7 +3831,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-
   /**
    * PaymentAccount update
    */
@@ -3872,7 +3840,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3884,7 +3852,6 @@ export namespace Prisma {
      */
     where: PaymentAccountWhereUniqueInput
   }
-
 
   /**
    * PaymentAccount updateMany
@@ -3900,7 +3867,6 @@ export namespace Prisma {
     where?: PaymentAccountWhereInput
   }
 
-
   /**
    * PaymentAccount upsert
    */
@@ -3910,7 +3876,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3927,7 +3893,6 @@ export namespace Prisma {
     update: XOR<PaymentAccountUpdateInput, PaymentAccountUncheckedUpdateInput>
   }
 
-
   /**
    * PaymentAccount delete
    */
@@ -3937,7 +3902,7 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
     /**
@@ -3945,7 +3910,6 @@ export namespace Prisma {
      */
     where: PaymentAccountWhereUniqueInput
   }
-
 
   /**
    * PaymentAccount deleteMany
@@ -3957,7 +3921,6 @@ export namespace Prisma {
     where?: PaymentAccountWhereInput
   }
 
-
   /**
    * PaymentAccount without action
    */
@@ -3967,11 +3930,10 @@ export namespace Prisma {
      */
     select?: PaymentAccountSelect<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: PaymentAccountInclude<ExtArgs> | null
   }
-
 
 
   /**
