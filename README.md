@@ -7,7 +7,7 @@ This API provides endpoints for simulating payment operations. It allows users t
 #### Technologies Used
 
 - **Fastify**: Fastify is used as the web framework for building the API server, providing high performance and low overhead.
-- **Prisma**: Prisma is used as the ORM (Object-Relational Mapping) to interact with the database, simplifying database operations.
+- **Prisma with PostgreSQL via Supabase**: Prisma is used as the ORM (Object-Relational Mapping) to interact with the PostgreSQL database, simplifying database operations. PostgreSQL database is hosted on Supabase, a platform providing a suite of tools and services built on top of PostgreSQL, simplifying database management and providing additional functionality such as authentication and real-time data handling.
 - **jsonwebtoken**: This library is used for generating and verifying JWT (JSON Web Tokens) for authentication.
 - **nanoid**: nanoid is used for generating unique user IDs.
 - **@fastify/swagger**: This plugin is used for generating Swagger documentation for the API endpoints.
@@ -114,3 +114,6 @@ Follow these steps to use the API server:
   ```
 
 - the API server is ready to be consumed at http://localhost:3000
+
+**Note**:
+If you encounter issues with fetching data or connecting to the database, please don't hesitate to contact me. Since I'm using a free account on Supabase, the database may freeze if it's not used for a while
