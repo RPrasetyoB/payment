@@ -23,6 +23,7 @@ https://documenter.getpostman.com/view/30790473/2sA3JM8h89
 
 Before using the API server, ensure that you have:
 
+- **Visual Studio Code or any IDE**.
 - **Node.js**: Make sure you have Node.js version 20.11. You can download Node.js from [Node.js official website](https://nodejs.org/en/download).
 - **Docker Desktop**.
 
