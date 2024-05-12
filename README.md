@@ -13,7 +13,7 @@ This API provides endpoints for simulating payment operations. It allows users t
 - **@fastify/swagger**: This plugin is used for generating Swagger documentation for the API endpoints.
 - **dotenv**: dotenv is used for loading environment variables from a .env file.
 - **bcrypt**: bcrypt is used for hashing passwords securely.
-- **joi**: joi is used for data validation.
+- **joi**: joi is used for body validation.
 
 ### Postman Documentation
 
