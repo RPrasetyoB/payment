@@ -78,6 +78,9 @@ export const loggedUser = (decodedToken: JwtPayload | null) => {
 | Create withdrawal                   | POST   | baseUrl*/api/payment/withdraw      | yes                 | payment_account_id:  number, amount: number, currency: string                    |
 | Get paymeny history                 | GET    | baseUrl*/api/payment/history       | yes                 | -                                                                                |
 
+#### API root : <br>
+![Screenshot_25](https://github.com/RPrasetyoB/payment/assets/129088807/6b27199f-3c75-4554-bf08-e10859b69c93)
+
 #### Account for testing :
 
 ```json
