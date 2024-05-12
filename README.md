@@ -13,7 +13,7 @@ This API provides endpoints for simulating payment operations. It allows users t
 - **@fastify/swagger**: This plugin is used for generating Swagger documentation for the API endpoints.
 - **dotenv**: dotenv is used for loading environment variables from a .env file.
 - **bcrypt**: bcrypt is used for hashing passwords securely.
-- **joi**: joi is used for data validation.
+- **joi**: joi is used for body validation.
 
 ### Postman Documentation
 
@@ -77,6 +77,9 @@ export const loggedUser = (decodedToken: JwtPayload | null) => {
 | Create payment transaction transfer | POST   | *baseUrl*/api/payment/send         | yes                 | payment_account_id: number, amount: number, currency: string, to_address: string |
 | Create withdrawal                   | POST   | baseUrl*/api/payment/withdraw      | yes                 | payment_account_id:  number, amount: number, currency: string                    |
 | Get paymeny history                 | GET    | baseUrl*/api/payment/history       | yes                 | -                                                                                |
+
+#### API root : <br>
+![Screenshot_25](https://github.com/RPrasetyoB/payment/assets/129088807/6b27199f-3c75-4554-bf08-e10859b69c93)
 
 #### Account for testing :
 
