@@ -22,7 +22,7 @@ middleWares(app);
 app.register(Swagger, {
   mode: "static",
   specification: {
-    path: "api/docs.yaml",
+    path: "docs.yaml",
   },
   exposeRoute: true,
 } as FastifyPluginOptions);
