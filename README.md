@@ -4,6 +4,17 @@
 
 This API provides endpoints for simulating payment operations. It allows users to register, log in, manage their payment accounts, perform transactions such as transfers and withdrawals, and view payment history.
 
+#### Technologies Used
+
+- **Fastify**: Fastify is used as the web framework for building the API server, providing high performance and low overhead.
+- **Prisma**: Prisma is used as the ORM (Object-Relational Mapping) to interact with the database, simplifying database operations.
+- **jsonwebtoken**: This library is used for generating and verifying JWT (JSON Web Tokens) for authentication.
+- **nanoid**: nanoid is used for generating unique user IDs.
+- **@fastify/swagger**: This plugin is used for generating Swagger documentation for the API endpoints.
+- **dotenv**: dotenv is used for loading environment variables from a .env file.
+- **bcrypt**: bcrypt is used for hashing passwords securely.
+- **joi**: joi is used for data validation.
+
 ### Postman Documentation
 
 https://documenter.getpostman.com/view/30790473/2sA3JM8h89
