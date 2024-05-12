@@ -43,3 +43,5 @@ const server_port: number = Number(process.env.SERVER_PORT) || 3001;
 
 // Start the Fastify server
 app.listen(server_port, "0.0.0.0", () => console.log(`Listening on port: http://localhost:${server_port}`));
+
+export default app;
