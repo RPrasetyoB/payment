@@ -100,11 +100,10 @@ Follow these steps to use the API server:
   git clone https://github.com/RPrasetyoB/payment.git
   ```
 
-- **Install Dependencies**: Navigate to the cloned directory and install the necessary dependencies using npm.
+- **Navigate to the cloned directorys**:
   
   ```bash
   cd payment
-  npm install
   ```
 
 - **Set Up Environment Variables**: As the `.env` file is included in the repository for testing purposes, you don't need to set up environment variables manually.
