@@ -108,7 +108,7 @@ Follow these steps to use the API server:
 
 - **Set Up Environment Variables**: As the `.env` file is included in the repository for testing purposes, you don't need to set up environment variables manually.
 
-- **Open Docker Desktop**
+- **Open Docker Desktop** : Make sure docker engine running before to next step.
 
 - **Run the Server**: Start the API server in Container locally using the following command:
   
