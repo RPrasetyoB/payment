@@ -119,4 +119,4 @@ Follow these steps to use the API server:
 - the API server is ready to be consumed at http://localhost:3000
 
 **Note**:
-If you encounter issues with fetching data or connecting to the database, please don't hesitate to contact me. Since I'm using a free account on Supabase, the database may freeze if it's not used for a while
+If you encounter issues with fetching data or connecting to the database, try resend request again. And if still get issue please don't hesitate to contact me. Since I'm using a free account on Supabase, the database may freeze if it's not used for a while
