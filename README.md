@@ -17,7 +17,7 @@ This API provides endpoints for simulating payment operations. It allows users t
 
 ### Postman Documentation
 
-https://documenter.getpostman.com/view/30790473/2sA3JM8h89
+[https://documenter.getpostman.com/view/30790473/2sA3JM8h89](https://documenter.getpostman.com/view/36914326/2sA3sAfmwA)
 
 ## Prerequisites
 
@@ -72,11 +72,11 @@ export const loggedUser = (decodedToken: JwtPayload | null) => {
 | User detail                         | GET    | *baseUrl*/api/v1/user/profile      | yes                 | -                                                                                |
 | Get all user (for testing reason)   | GET    | *baseUrl*/api/v1/user              | no                  | -                                                                                |
 | Payment Account Registration        | POST   | *baseUrl*/api/v1/payment-account   | yes                 | account_name: string , account_number: string, type: string                      |
-| Get user's payment accounts         | GET    | *baseUrl*/api/payment-account      | yes                 | -                                                                                |
-| Delete Payment account              | DELETE | *baseUrl*/api/payment-accountr/:id | yes                 | -                                                                                |
-| Create payment transaction transfer | POST   | *baseUrl*/api/payment/send         | yes                 | payment_account_id: number, amount: number, currency: string, to_address: string |
-| Create withdrawal                   | POST   | baseUrl*/api/payment/withdraw      | yes                 | payment_account_id:  number, amount: number, currency: string                    |
-| Get paymeny history                 | GET    | baseUrl*/api/payment/history       | yes                 | -                                                                                |
+| Get user's payment accounts         | GET    | *baseUrl*/api/v1/payment-account      | yes                 | -                                                                                |
+| Delete Payment account              | DELETE | *baseUrl*/api/v1/payment-accountr/:id | yes                 | -                                                                                |
+| Create payment transaction transfer | POST   | *baseUrl*/api/v1/payment/send         | yes                 | payment_account_id: number, amount: number, currency: string, to_address: string |
+| Create withdrawal                   | POST   | baseUrl*/api/v1/payment/withdraw      | yes                 | payment_account_id:  number, amount: number, currency: string                    |
+| Get paymeny history                 | GET    | baseUrl*/api/v1/payment/history       | yes                 | -                                                                                |
 
 #### API root : <br>
 ![Screenshot_25](https://github.com/RPrasetyoB/payment/assets/129088807/6b27199f-3c75-4554-bf08-e10859b69c93)
