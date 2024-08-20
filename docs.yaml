@@ -285,7 +285,15 @@ paths:
         - payment history
       summary: send
       requestBody:
-        content: {}
+        content: 
+          application/json:
+            schema:
+              type: object
+              example:
+                payment_account_id: 3
+                amount: 200
+                currency: USD,
+                to_address: "123456"
       responses:
         '200':
           description: OK
